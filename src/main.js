@@ -3,13 +3,25 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import ApolloClient from "apollo-boost"
+import VueApollo from "vue-apollo"
 
 Vue.config.productionTip = false
+
+const apolloProvider = new VueApollo({
+    defaultClient: new ApolloClient({
+        uri: "http://localhost:3000"
+    })
+})
+
+Vue.use(VueApollo);
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
+  provide: apolloProvider.provide(),
   template: '<App/>'
 })
