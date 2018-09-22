@@ -1,0 +1,549 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "OBJECT",
+        "name": "Query",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "QuestionType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Context",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "ID",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "DateTime",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Question",
+        "possibleTypes": [
+          {
+            "name": "LikeQuestion"
+          },
+          {
+            "name": "LikeDislikeQuestion"
+          },
+          {
+            "name": "ChoiceQuestion"
+          },
+          {
+            "name": "RegulatorQuestion"
+          },
+          {
+            "name": "RankingQuestion"
+          },
+          {
+            "name": "FavoriteQuestion"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Item",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ImageData",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Survey",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "User",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Vote",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Answer",
+        "possibleTypes": [
+          {
+            "name": "LikeAnswer"
+          },
+          {
+            "name": "LikeDislikeAnswer"
+          },
+          {
+            "name": "ChoiceAnswer"
+          },
+          {
+            "name": "RegulatorAnswer"
+          },
+          {
+            "name": "RankingAnswer"
+          },
+          {
+            "name": "FavoriteAnswer"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Device",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "State",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Mutation",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ContextCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ContextCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ContextUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ContextUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ContextDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StateCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StateCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StateUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StateUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StateDeleteInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StateDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "DeviceCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DeviceCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "DeviceUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DeviceUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DeviceDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "BonusImageCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Upload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "BonusImageCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ImageUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ImageUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "QuestionCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "QuestionUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ItemCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ItemCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ItemUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ItemUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ItemDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LabelCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Label",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LabelUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LabelUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LabelDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ChoiceDescriptionCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceDescriptionCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceDescription",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "ChoiceDescriptionUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceDescriptionUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceDescriptionDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SurveyCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SurveyCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "SurveyUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SurveyUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SurveyDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserUpdateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserUpdatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserDeletePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LoginInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LoginPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "AnswerCreateInput",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AnswerCreatePayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Subscription",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ContextUpdateSubscriptionPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DeviceUpdateSubscriptionPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserUpdateSubscriptionPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AnswerUpdateSubscriptionPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "NewVoteSubscriptionPayload",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Schema",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Type",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__TypeKind",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Field",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__InputValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__EnumValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Directive",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__DirectiveLocation",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LikeQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LikeDislikeQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RegulatorQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RankingQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "FavoriteQuestion",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LikeAnswer",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LikeDislikeAnswer",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ChoiceAnswer",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RegulatorAnswer",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "RankingAnswer",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "FavoriteAnswer",
+        "possibleTypes": null
+      }
+    ]
+  }
+}
