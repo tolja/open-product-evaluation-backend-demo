@@ -1,42 +1,41 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-
-      <div v-if="!allQuestionsAnswered" class="vote">
+  <div v-if="!allQuestionsAnswered">
 
         <like-question
           v-if="currentQuestion.__typename === 'LikeQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></like-question>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></like-question>
 
         <like-dislike-question
           v-if="currentQuestion.__typename === 'LikeDislikeQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></like-dislike-question>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></like-dislike-question>
 
         <choice-question
           v-if="currentQuestion.__typename === 'ChoiceQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></choice-question>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></choice-question>
 
         <regulator-question
           v-if="currentQuestion.__typename === 'RegulatorQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></regulator-question>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></regulator-question>
 
         <favorite-question
           v-if="currentQuestion.__typename === 'FavoriteQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></favorite-question>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></favorite-question>
 
         <ranking-question
           v-if="currentQuestion.__typename === 'RankingQuestion'"
-          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion"></ranking-question>
-
-      </div>
-
-      <div v-if="allQuestionsAnswered" class="vote">
-        <questions-answered></questions-answered>
-      </div>
-
-      </div>
+          @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
+          :questionLength="questionLength"></ranking-question>
 
   </div>
+
+      <div v-else>
+        <questions-answered></questions-answered>
+      </div>
 
 </template>
 
@@ -55,6 +54,7 @@
         questions: null,
         currentQuestion: null,
         questionCounter: 0,
+        questionLength: 0,
         allQuestionsAnswered: false
       }
     },
@@ -70,12 +70,13 @@
     created() {
      this.questions = this.$store.getters.getCurrentContext.activeSurvey.questions;
      this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
+      this.questionLength = this.$store.getters.getCurrentContext.activeSurvey.questions.length;
     },
     computed: {
     },
     methods: {
       nextQuestion() {
-        if(this.questionCounter < this.$store.getters.getCurrentContext.activeSurvey.questions.length - 1) {
+        if(this.questionCounter < this.questionLength - 1) {
         this.questionCounter += 1;
         this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
   }

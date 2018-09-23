@@ -68,6 +68,8 @@ const getContextList = () => client.query(
                   image {
                     url
                   }
+                  id
+                  label
                   value
                 }
                 default
