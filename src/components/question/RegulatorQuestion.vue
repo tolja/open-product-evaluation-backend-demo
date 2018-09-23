@@ -13,6 +13,14 @@
           <div class="col-12"> {{currentQuestion.description}}  <p></p></div>
 
         </div>
+
+        <div class="row">
+          <div class="col" v-for="item in currentQuestion.items" :key="item.id">
+            <img class="regulator-image-item" v-bind:src="item.image.url" v-bind:alt="item.label">
+          </div>
+        </div>
+        <p></p>
+
         <div class="row">
           <div class="col">
             <b-form-slider v-model="rating" :ticks="sliderTicks" :ticks-labels="sliderTickLabels" :min="this.currentQuestion.min" :max="this.currentQuestion.max" :step="this.currentQuestion.stepSize" trigger-change-event></b-form-slider>
@@ -48,7 +56,23 @@
       this.getSliderData();
     },
     methods: {
+
       createRegulatorAnswer() {
+
+        if (this.$store.getters.getRegulatorAnswers.length !== 0) {
+
+          const regulatorAnswers = this.$store.getters.getRegulatorAnswers;
+
+          if(regulatorAnswers.includes(this.currentQuestion.id)) {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          }
+
+        } else {
+          this.sendRegulatorAnswer()
+        }
+      },
+      sendRegulatorAnswer() {
         this.$store.dispatch('createRegulatorAnswer', {
           questionID: this.currentQuestion.id,
           rating: this.rating
@@ -70,8 +94,8 @@
 </script>
 
 <style scoped>
-  .choice-image {
-    width:150px;
-    height:150px;
+  .regulator-image-item {
+    width:300px;
+    height:200px;
   }
 </style>

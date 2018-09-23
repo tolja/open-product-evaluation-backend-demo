@@ -21,6 +21,10 @@ const getContextList = () => client.query(
         contexts {
           id
           name
+          devices {
+            id 
+            name
+          }
           activeSurvey {
             id
             description
@@ -62,6 +66,7 @@ const getContextList = () => client.query(
                   label
                   code
                 }
+                choiceDefault: default
               }
               ... on RegulatorQuestion {
                 labels {
@@ -86,7 +91,10 @@ const getContextList = () => client.query(
               }
             }
           }
-          activeQuestion { id, value, type }
+          states {
+            key
+            value
+          }
         }
       }`,
     context: {

@@ -19,9 +19,11 @@
               <p class="card-text">
                 {{ context.activeSurvey.types }}
               </p>
-              <strong class="card-title">Aktive Frage</strong>
-              <p class="card-text">
-                {{ context.activeQuestion.value }} (Fragen-Typ: {{ context.activeQuestion.type }})
+              <strong class="card-title">Verbundene Devices</strong>
+              <p>
+              <span class="card-text" v-for="(device,index) in context.devices" :key="device.id">
+                {{ device.name }}<span v-if="index !== (context.devices.length - 1)">,</span>
+              </span>
               </p>
             </div>
           </div>
@@ -49,6 +51,7 @@
     },
     created() {
       this.$store.dispatch("getContextList")
+      this.$store.dispatch("cleanAnswers")
     },
     computed: {
       contexts() {

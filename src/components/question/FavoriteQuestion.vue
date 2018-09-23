@@ -52,12 +52,29 @@
     computed: {
     },
     methods: {
+
       createFavoriteAnswer() {
+
+        if (this.$store.getters.getFavoriteAnswers.length !== 0) {
+
+          const favoriteAnswers = this.$store.getters.getFavoriteAnswers;
+
+          if(favoriteAnswers.includes(this.currentQuestion.id)) {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          }
+
+        } else {
+
+          this.sendFavoriteAnswer()
+        }
+      },
+      sendFavoriteAnswer() {
         this.$store.dispatch('createFavoriteAnswer',{ questionID: this.currentQuestion.id, itemID: this.itemID } ).then(() => {
           this.$emit('nextQuestion')
           Router.push('/question');
         })
-      },
+      }
     }
   }
 </script>

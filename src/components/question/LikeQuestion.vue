@@ -13,6 +13,13 @@
           <div class="col-12"> {{currentQuestion.description}}  <p></p></div>
 
         </div>
+
+        <div class="row">
+          <div class="col" v-for="item in currentQuestion.items" :key="item.id">
+            <img class="like-image-item" v-bind:src="item.image.url" v-bind:alt="item.label">
+              </div>
+        </div>
+<p></p>
         <div class="row">
           <div class="col">
             <img class="like-image" v-bind:src="currentQuestion.likeIcon.url" />
@@ -41,26 +48,46 @@
     data() {
       return {
        liked: false,
-        likeButton: 'btn btn-outline-primary'
+        likeButton: 'btn btn-outline-success'
       }
     },
     props: ['currentQuestion','questionCounter','questionLength'],
     computed: {
     },
     methods: {
+
       createLikeAnswer() {
-        this.$store.dispatch('createLikeAnswer',{ questionID: this.currentQuestion.id, liked: false } ).then(() => {
+
+        if (this.$store.getters.getLikeAnswers.length !== 0) {
+
+          const likeAnswers = this.$store.getters.getLikeAnswers;
+
+          if(likeAnswers.includes(this.currentQuestion.id)) {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          }
+
+        } else {
+          this.sendLikeAnswer()
+        }
+      },
+      sendLikeAnswer() {
+        this.$store.dispatch('createLikeAnswer',{ questionID: this.currentQuestion.id, liked: this.liked } ).then(() => {
           this.$emit('nextQuestion')
+          this.resetButton();
           Router.push('/question');
         })
       },
       changeColor(){
-        if(this.likeButton = 'btn btn-outline-secondary'){
+        if(this.likeButton = 'btn btn-outline-success'){
           this.likeButton = 'btn btn-success';
         }
         else
-          this.likeButton = 'btn btn-outline-secondary';
+          this.likeButton = 'btn btn-outline-success';
 
+      },
+      resetButton() {
+        this.likeButton = 'btn btn-outline-success';
       }
     }
   }
@@ -68,8 +95,12 @@
 
 <style scoped>
 .like-image {
-  width:200px;
-  height:200px;
+  width:75px;
+  height:75px;
   margin-bottom:20pt;
+}
+.like-image-item {
+  width:300px;
+  height:200px;
 }
 </style>

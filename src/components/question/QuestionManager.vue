@@ -1,41 +1,37 @@
 <template>
-  <div v-if="!allQuestionsAnswered">
-
+<div v-if="!allQuestionsAnswered">
         <like-question
-          v-if="currentQuestion.__typename === 'LikeQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'LikeQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
-          :questionLength="questionLength"></like-question>
+          :questionLength="questionLength" ></like-question>
 
         <like-dislike-question
-          v-if="currentQuestion.__typename === 'LikeDislikeQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'LikeDislikeQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
           :questionLength="questionLength"></like-dislike-question>
 
         <choice-question
-          v-if="currentQuestion.__typename === 'ChoiceQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'ChoiceQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
           :questionLength="questionLength"></choice-question>
 
         <regulator-question
-          v-if="currentQuestion.__typename === 'RegulatorQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'RegulatorQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
           :questionLength="questionLength"></regulator-question>
 
         <favorite-question
-          v-if="currentQuestion.__typename === 'FavoriteQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'FavoriteQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
           :questionLength="questionLength"></favorite-question>
 
         <ranking-question
-          v-if="currentQuestion.__typename === 'RankingQuestion'"
+          v-if="currentQuestion && currentQuestion.__typename === 'RankingQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
           :questionLength="questionLength"></ranking-question>
 
-  </div>
-
-      <div v-else>
-        <questions-answered></questions-answered>
-      </div>
+</div>
+        <questions-answered v-else></questions-answered>
 
 </template>
 
@@ -68,9 +64,11 @@
       'questions-answered': QuestionsAnswered
     },
     created() {
-     this.questions = this.$store.getters.getCurrentContext.activeSurvey.questions;
-     this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
-      this.questionLength = this.$store.getters.getCurrentContext.activeSurvey.questions.length;
+      if(Object.keys(this.$store.getters.getCurrentContext).length !== 0) {
+        this.questions = this.$store.getters.getCurrentContext.activeSurvey.questions;
+        this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
+        this.questionLength = this.$store.getters.getCurrentContext.activeSurvey.questions.length;
+      }
     },
     computed: {
     },
@@ -81,9 +79,9 @@
         this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
   }
   else {
-    this.allQuestionsAnswered = true;
+          this.allQuestionsAnswered = true;
         }
-      }
+      },
     },
   }
 </script>

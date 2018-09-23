@@ -1,11 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// home
-import Home from '@/components/Home.vue'
-
 // device
-import DeviceRegister from '@/components/device/DeviceRegister.vue'
+import DeviceRegister from '@/components/DeviceRegister.vue'
 import DeviceInfo from '@/components/device/DeviceInfo.vue'
 
 //context
@@ -18,10 +15,11 @@ import Survey from '@/components/survey/Survey.vue'
 import QuestionManager from '@/components/question/QuestionManager.vue'
 
 //vote
-import Vote from '@/components/votes/Vote.vue'
+import Vote from '@/components/vote/Vote.vue'
 
 
 import AppWrapper from '@/components/AppWrapper';
+import store from '@/store/store';
 
 Vue.use(Router);
 
@@ -30,20 +28,24 @@ export default new Router({
     {
       path: '/',
       component: AppWrapper,
+      beforeEnter: (to, from, next) => {
+        if (store.state.device.token !== null) {
+          next('/context/list');
+        } else {
+          next();
+        }
+      },
       children: [
         {
           path: '',
-          component: Home,
-        }]
+          component: DeviceRegister,
+        }
+      ]
     },
     {
       path: '/device',
       component: AppWrapper,
       children: [
-        {
-          path: 'register',
-          component: DeviceRegister,
-        },
         {
           path: 'info',
           component: DeviceInfo,
@@ -65,6 +67,13 @@ export default new Router({
         {
           path: '',
           component: Survey,
+          beforeEnter (to, from, next) {
+            if (Object.keys(store.state.contexts.currentContext).length !== 0) {
+              next();
+            } else {
+              next('/context/list');
+            }
+          },
         }],
     },
     {
@@ -74,6 +83,14 @@ export default new Router({
         {
           path: '',
           component: QuestionManager,
+          beforeEnter (to, from, next) {
+
+            if (Object.keys(store.state.contexts.currentContext.context).length !== 0) {
+              next();
+            } else {
+              next('/context/list');
+            }
+          },
         },
       ],
     },

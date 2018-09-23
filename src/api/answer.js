@@ -9,7 +9,7 @@ const createChoiceAnswer = (questionID, choice) => client.mutate(
   {
     mutation: gql`
       mutation createChoiceAnswer {
-      createAnswer(data: { questionID: "${questionID}",  choice: "${choice}" })
+      createAnswer(data: { questionID: "${questionID}",  choice: ${choice} })
       {
         __typename
         answer{

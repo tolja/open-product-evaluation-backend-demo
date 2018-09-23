@@ -2,21 +2,19 @@ import Device from '@/api/device';
 import Router from '@/router';
 
 const state = {
-  device: {
-    token: null,
-    deviceID: null,
+    token: localStorage.getItem('token'),
+    deviceID: localStorage.getItem('deviceID'),
     hasContext: false
-  }
 };
 
 const getters = {
 
   getDeviceID( state ){
-    return state.device.deviceID;
+    return state.deviceID;
   },
 
   getDeviceToken(state) {
-    return state.device.token;
+    return state.token;
   }
 }
 
@@ -42,13 +40,14 @@ const actions = {
 const mutations = {
 
   createDevice(state, payload) {
-    state.device.deviceID = payload.data.createDevice.device.id;
-    state.device.token = payload.data.createDevice.token;
+    state.deviceID = payload.data.createDevice.device.id;
+    state.token = payload.data.createDevice.token;
+    localStorage.setItem('deviceID',payload.data.createDevice.device.id);
     localStorage.setItem('token',payload.data.createDevice.token);
   },
 
   updateDevice(state, data) {
-    state.device.hasContext = true;
+    state.hasContext = true;
   },
 
 

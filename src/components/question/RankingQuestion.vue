@@ -40,8 +40,11 @@
           </div>
             </div>
         <div class="row">
-          <div class="col-12">
-            <p><button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-primary">Antwort senden</button></p>
+          <div class="col">
+            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-primary">Antwort senden (Aktuelle Reihenfolge)</button>
+          </div>
+          <div class="col">
+            <button type="submit" v-on:click.prevent="createEmptyRankingAnswer()" class="btn btn-danger">Antwort senden (Neutral, leeres Array)</button>
           </div>
         </div>
       </div>
@@ -71,7 +74,30 @@
     computed: {
     },
     methods: {
+
+      createEmptyRankingAnswer() {
+        this.$store.dispatch('createRankingAnswer',{ questionID: this.currentQuestion.id, rankedItems: null } ).then(() => {
+          this.$emit('nextQuestion')
+          Router.push('/question');
+        })
+      },
+
       createRankingAnswer() {
+
+        if (this.$store.getters.getRankingAnswers.length !== 0) {
+
+          const rankingAnswers = this.$store.getters.getRankingAnswers;
+
+          if(rankingAnswers.includes(this.currentQuestion.id)) {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          }
+
+        } else {
+          this.sendRankingAnswer()
+        }
+      },
+      sendRankingAnswer() {
         this.setRankingIDs();
         this.$store.dispatch('createRankingAnswer',{ questionID: this.currentQuestion.id, rankedItems: this.rankedIDs } ).then(() => {
           this.$emit('nextQuestion')
