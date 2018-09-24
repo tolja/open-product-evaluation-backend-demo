@@ -1,4 +1,3 @@
-import Answer from '@/api/answer';
 import client from '@/api/client';
 import gql from 'graphql-tag';
 

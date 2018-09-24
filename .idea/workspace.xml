@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2031687-9e44-43d1-b955-f26a5d4d76bf" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/api/client.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/device.js.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/answer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/answer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/context.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/context.js.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/device.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppNavigation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppNavigation.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DeviceRegister.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DeviceRegister.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/context/ContextList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/context/ContextList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/question/ChoiceQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/question/ChoiceQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/question/FavoriteQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/question/FavoriteQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/question/QuestionsAnswered.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/question/QuestionsAnswered.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/question/RegulatorQuestion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/question/RegulatorQuestion.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/survey/Survey.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/survey/Survey.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/vote/Vote.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/vote/Vote.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/modules/context.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/context.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/modules/device.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/modules/device.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,8 +22,8 @@
       <file leaf-file-name="client.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/client.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+            <state relative-caret-position="387">
+              <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -48,26 +31,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="answer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/api/answer.js">
+      <file leaf-file-name="store.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/store/store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+            <state relative-caret-position="45">
+              <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#22#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="context.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="context.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/store/modules/context.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="249" column="36" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
+            <state>
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragmentTypes.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/fragmentTypes.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7478">
+              <caret line="501" column="7" selection-start-line="501" selection-start-column="7" selection-end-line="501" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -94,7 +85,16 @@
         <entry file="file://$PROJECT_DIR$/src/components/question/RegulatorQuestion.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="245">
-              <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+              <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -104,27 +104,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="900">
               <caret line="66" column="52" selection-start-line="66" selection-start-column="52" selection-end-line="66" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppWrapper.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/AppWrapper.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="device.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/modules/device.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="49" column="23" lean-forward="true" selection-start-line="49" selection-start-column="23" selection-end-line="49" selection-end-column="69" />
-              <folding>
-                <element signature="e#0#30#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -204,7 +183,6 @@
         <option value="$PROJECT_DIR$/src/api/answer.js" />
         <option value="$PROJECT_DIR$/src/api/context.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
-        <option value="$PROJECT_DIR$/src/api/client.js" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/DeviceRegister.vue" />
         <option value="$PROJECT_DIR$/src/components/AppNavigation.vue" />
@@ -216,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/components/question/FavoriteQuestion.vue" />
         <option value="$PROJECT_DIR$/src/components/question/RegulatorQuestion.vue" />
         <option value="$PROJECT_DIR$/src/store/modules/context.js" />
+        <option value="$PROJECT_DIR$/src/api/client.js" />
       </list>
     </option>
   </component>
@@ -381,7 +360,7 @@
       <option name="presentableId" value="Default" />
       <updated>1537368068434</updated>
       <workItem from="1537368070187" duration="3250000" />
-      <workItem from="1537393363050" duration="169553000" />
+      <workItem from="1537393363050" duration="170591000" />
     </task>
     <task id="LOCAL-00001" summary="added more configuration, bootstrap and apollo for graphql requests">
       <created>1537452420968</created>
@@ -394,7 +373,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172803000" />
+    <option name="totallyTimeSpent" value="173841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="719" extended-state="0" />
@@ -509,13 +488,6 @@
         <state relative-caret-position="-5201" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -612,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/fragmentTypes.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="501" column="7" lean-forward="true" selection-start-line="501" selection-start-column="7" selection-end-line="501" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/question/RankingQuestion.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -658,16 +623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="29" column="74" selection-start-line="29" selection-start-column="74" selection-end-line="29" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -753,13 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/question/ChoiceQuestion.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="17" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/question/FavoriteQuestion.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -770,37 +718,64 @@
     <entry file="file://$PROJECT_DIR$/src/components/question/RegulatorQuestion.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
-          <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+          <caret line="22" column="15" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/answer.js.old">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/store.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="40" selection-start-line="3" selection-start-column="40" selection-end-line="3" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/fragmentTypes.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7478">
+          <caret line="501" column="7" selection-start-line="501" selection-start-column="7" selection-end-line="501" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/modules/context.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/client.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+        <state relative-caret-position="387">
+          <caret line="31" column="43" selection-start-line="31" selection-start-column="43" selection-end-line="31" selection-end-column="43" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/answer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/question/ChoiceQuestion.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="181">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="17" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/modules/context.js">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="249" column="36" selection-start-line="249" selection-start-column="36" selection-end-line="249" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="275">
+          <caret line="19" column="28" lean-forward="true" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
         </state>
       </provider>
     </entry>
