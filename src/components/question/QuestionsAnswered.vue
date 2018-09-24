@@ -19,6 +19,9 @@
 <script>
     export default {
         name: "QuestionsAnswered",
+      created: function () {
+        this.$store.dispatch('deleteDeviceFromContext')
+      }
     }
 </script>
 

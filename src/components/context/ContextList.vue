@@ -39,7 +39,7 @@
     },
     created() {
       this.$store.dispatch("getContextList")
-      this.$store.dispatch("cleanAnswers")
+      this.$store.dispatch("cleanCurrentContext")
     },
     computed: {
       contexts() {

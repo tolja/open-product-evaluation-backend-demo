@@ -60,6 +60,22 @@ const actions = {
     Router.push('/survey');
   },
 
+  async deleteDeviceFromContext({ commit }) {
+    await client.mutate({
+      mutation: gql`
+        mutation updateDevice($deviceID: ID!, $context: ID) {
+          updateDevice(data: {context: $context}, deviceID: $deviceID) {
+            device {
+              id
+              name
+            }
+          }
+        }`,
+      variables: { deviceID: state.deviceID, context: null },
+    });
+    commit('deleteDeviceFromContext');
+  },
+
 }
 
 const mutations = {
@@ -74,6 +90,11 @@ const mutations = {
   updateDevice(state) {
     state.hasContext = true;
     localStorage.setItem('hasContext',JSON.stringify(true));
+  },
+
+  deleteDeviceFromContext(state) {
+    state.hasContext = false;
+    localStorage.setItem('hasContext',JSON.stringify(false));
   },
 
 

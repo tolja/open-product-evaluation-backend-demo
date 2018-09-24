@@ -1,5 +1,5 @@
 <template>
-<div v-if="!allQuestionsAnswered">
+<div v-if="!voteCreated">
         <like-question
           v-if="currentQuestion && currentQuestion.__typename === 'LikeQuestion'"
           @nextQuestion='nextQuestion' :currentQuestion="currentQuestion" :questionCounter="questionCounter"
@@ -51,7 +51,7 @@
         currentQuestion: null,
         questionCounter: 0,
         questionLength: 0,
-        allQuestionsAnswered: false
+        voteCreated: false
       }
     },
     components: {
@@ -79,7 +79,7 @@
         this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
   }
   else {
-          this.allQuestionsAnswered = true;
+          this.voteCreated = true;
         }
       },
     },

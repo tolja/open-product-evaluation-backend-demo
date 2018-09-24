@@ -49,8 +49,8 @@ const getters = {
 
 const actions = {
 
-  cleanAnswers(context) {
-    context.commit('cleanAnswers');
+  cleanCurrentContext(context) {
+    context.commit('cleanCurrentContext');
   },
 
   async getContextList({ commit }) {
@@ -216,7 +216,7 @@ const actions = {
   async createFavoriteAnswer({ commit }, payload) {
     const data = await client.mutate({
       mutation: gql`
-        mutation createFavoriteAnswer($questionID: ID!, $favoriteItem: ID!) {
+        mutation createFavoriteAnswer($questionID: ID!, $favoriteItem: ID) {
           createAnswer(data: {questionID: $questionID, favoriteItem: $favoriteItem})
           {
             __typename
@@ -253,8 +253,9 @@ const actions = {
 
 const mutations = {
 
-  cleanAnswers(state) {
+  cleanCurrentContext(state) {
     state.currentContext.answerList = [];
+    state.currentContext.context = {};
     state.currentContext.choiceAnswers = [];
     state.currentContext.likeAnswers = [];
     state.currentContext.likeDislikeAnswers = [];

@@ -48,7 +48,7 @@
     name: "FavoriteQuestion",
     data() {
       return {
-       itemID: ''
+       itemID: null
       }
     },
     props: ['currentQuestion','questionCounter','questionLength'],

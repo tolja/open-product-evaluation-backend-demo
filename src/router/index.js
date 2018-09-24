@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // device
-import DeviceRegister from '@/components/DeviceRegister.vue'
-import DeviceInfo from '@/components/device/DeviceInfo.vue'
+import RegisterDevice from '@/components/device/RegisterDevice.vue'
 
 //context
 import ContextList from '@/components/context/ContextList.vue'
@@ -38,7 +37,7 @@ export default new Router({
       children: [
         {
           path: '',
-          component: DeviceRegister,
+          component: RegisterDevice,
         }
       ]
     },

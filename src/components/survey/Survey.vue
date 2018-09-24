@@ -27,7 +27,7 @@
               </div>
               <div class="col">
                 <div class="card-body">
-                  <router-link to="/context/list" class="btn btn-secondary" tag="button">Zurück zu den Kontexten</router-link>
+                  <router-link to="/context/list" v-on:click.native="deleteDeviceFromContext()" class="btn btn-secondary" tag="button">Zurück zu den Kontexten</router-link>
                 </div>
               </div>
             </div>
@@ -56,7 +56,9 @@
       }
     },
     methods: {
-
+      deleteDeviceFromContext() {
+        this.$store.dispatch('deleteDeviceFromContext')
+      }
     },
   };
 </script>
