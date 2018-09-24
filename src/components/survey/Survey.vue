@@ -21,9 +21,14 @@
                 </p>
               </div>
             </div>
-            <div class="col-4 my-auto">
+            <div class="col">
               <div class="card-body">
                 <router-link to="/question" class="btn btn-primary" tag="button">Umfrage starten!</router-link>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <router-link to="/context/list" class="btn btn-secondary" tag="button">Zurück zu den Kontexten</router-link>
+                </div>
               </div>
             </div>
           </div>

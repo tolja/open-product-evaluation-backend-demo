@@ -1,7 +1,15 @@
 <template>
-  <div>hallo i bims 1 vote
-
-
+  <div class="card">
+    <div class="card-header">
+      Vote
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+         123
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

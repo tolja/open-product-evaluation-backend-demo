@@ -1,7 +1,4 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-
       <form id="context-list" method="post">
       <div class="card context" v-for="context in contexts" :key="context.id">
         <div class="card-header">
@@ -19,12 +16,6 @@
               <p class="card-text">
                 {{ context.activeSurvey.types }}
               </p>
-              <strong class="card-title">Verbundene Devices</strong>
-              <p>
-              <span class="card-text" v-for="(device,index) in context.devices" :key="device.id">
-                {{ device.name }}<span v-if="index !== (context.devices.length - 1)">,</span>
-              </span>
-              </p>
             </div>
           </div>
           <div class="col-4 my-auto">
@@ -36,9 +27,6 @@
       </div>
       </form>
 
-
-    </div>
-  </div>
 
 </template>
 
@@ -59,8 +47,8 @@
       }
     },
     methods: {
-      updateDevice(contextID) {
-        this.$store.dispatch('updateDevice',{ contextID: contextID } )
+      updateDevice(context) {
+        this.$store.dispatch('updateDevice',{ context: context } )
       },
       setCurrentContext(context) {
         this.$store.dispatch('setCurrentContext',{ context: context } )

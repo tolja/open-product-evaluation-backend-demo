@@ -18,9 +18,6 @@
 
         <!-- User Items -->
         <ul class="navbar-nav">
-          <li class="nav-item" v-if="hasDevice">
-            <router-link to="/device/info">Device Info</router-link>
-          </li>
         </ul>
       </div>
     </div>

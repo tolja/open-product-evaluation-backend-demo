@@ -6,7 +6,10 @@
     <div class="card-body">
   <div class="row">
     <div class="col">
-      <router-link to="/context/list" class="btn btn-primary" tag="button">Zurück zu den Kontexten</router-link>
+      <router-link to="/vote" class="btn btn-success" tag="button">Zur Auswertung</router-link>
+    </div>
+    <div class="col">
+      <router-link to="/context/list" class="btn btn-secondary" tag="button">Zurück zu den Kontexten</router-link>
     </div>
   </div>
   </div>

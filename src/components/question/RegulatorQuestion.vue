@@ -14,8 +14,9 @@
 
         </div>
 
-        <div class="row">
-          <div class="col" v-for="item in currentQuestion.items" :key="item.id">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+          <div class="col-auto" v-for="item in currentQuestion.items" :key="item.id">
             <img class="regulator-image-item" v-bind:src="item.image.url" v-bind:alt="item.label">
           </div>
         </div>
@@ -32,6 +33,7 @@
             <p><button type="submit" v-on:click.prevent="createRegulatorAnswer()" class="btn btn-primary">Antwort senden</button></p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </div>

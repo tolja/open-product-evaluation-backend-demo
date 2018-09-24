@@ -14,20 +14,23 @@
 
         </div>
 
-          <div class="row">
-            <div class="col" v-for="item in currentQuestion.items" :key="item.id">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-auto" v-for="item in currentQuestion.items" :key="item.id">
               <div class="row">
                 <div class="col">
+                  <p></p>
                   <label v-bind:for="item.id"> {{item.label}}</label>
                 </div>
               </div>
               <div class="row">
-                <div class="col">
+                <div class="col-auto">
               <img class="choice-image-item" v-bind:src="item.image.url" v-bind:alt="item.label">
                 </div>
               </div>
           </div>
           </div>
+        </div>
 <p></p>
         <div class="row">
           <div class="col" v-for="choice in currentQuestion.choices" :key="choice.id">
@@ -85,6 +88,9 @@
           }
         },
         sendChoiceAnswer() {
+          if(this.choiceID != null) {
+            this.choiceID.toString();
+          }
             this.$store.dispatch('createChoiceAnswer', {
               questionID: this.currentQuestion.id,
               choiceID: this.choiceID

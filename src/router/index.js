@@ -45,11 +45,6 @@ export default new Router({
     {
       path: '/device',
       component: AppWrapper,
-      children: [
-        {
-          path: 'info',
-          component: DeviceInfo,
-        }],
     },
     {
       path: '/context',

@@ -1,10 +1,11 @@
 import Answer from '@/api/answer';
-import Context from '@/api/context';
+import client from '@/api/client';
+import gql from 'graphql-tag';
 
 const state = {
   contextList: [],
   currentContext: {
-    context: {},
+    context: JSON.parse(localStorage.getItem('currentContext')),
     answerList: [],
     choiceAnswers: [],
     likeAnswers: [],
@@ -53,56 +54,200 @@ const actions = {
     context.commit('cleanAnswers');
   },
 
-  getContextList(context) {
-    Context.getContextList().then((data) => {
-      context.commit('getContextList', data);
-    })
+  async getContextList({ commit }) {
+    const data = await client.query({
+      query: gql` 
+        query getContextList {
+          contexts {
+            id
+            name
+            activeSurvey {
+              id
+              description
+              title
+              types
+              questions {
+                id
+                description
+                value
+                items {
+                  image {
+                    url
+                    id
+                  }
+                  label
+                }
+                ... on LikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on LikeDislikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                  dislikeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on ChoiceQuestion {
+                  choices {
+                    id
+                    image {
+                      url
+                    }
+                    label
+                    code
+                  }
+                  choiceDefault: default
+                }
+                ... on RegulatorQuestion {
+                  labels {
+                    image {
+                      url
+                    }
+                    id
+                    label
+                    value
+                  }
+                  default
+                  max
+                  min
+                  stepSize
+                }
+                items {
+                  id
+                  image {
+                    url
+                  }
+                  label
+                }
+              }
+            }
+            states {
+              key
+              value
+            }
+          }
+        }`
+    });
+    commit('getContextList', data);
   },
 
-  setCurrentContext(context, id) {
-      context.commit('setCurrentContext', id);
+  setCurrentContext(context, payload) {
+      context.commit('setCurrentContext', payload);
+      localStorage.setItem('currentContext',JSON.stringify(payload.context));
   },
 
-  createChoiceAnswer(context, payload) {
-    Answer.createChoiceAnswer(payload.questionID, payload.choiceID)
-      .then((choiceAnswer) => {
-        context.commit('createChoiceAnswer', choiceAnswer);
-      })
+  async createChoiceAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+      mutation createChoiceAnswer($questionID: ID!, $choiceID: ID) {
+        createAnswer(data: {questionID: $questionID, choice: $choiceID})
+        {
+          __typename
+          answer{
+            __typename
+            question
+          }
+        },
+      }`,
+      variables: { questionID: payload.questionID, choiceID: payload.choiceID },
+  });
+    commit('createChoiceAnswer', data);
   },
 
-  createLikeAnswer(context, payload) {
-    Answer.createLikeAnswer(payload.questionID, payload.liked)
-      .then((likeAnswer) => {
-        context.commit('createLikeAnswer', likeAnswer);
-      })
+  async createLikeAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+        mutation createLikeAnswer($questionID: ID!, $liked: Boolean) {
+          createAnswer(data: {questionID: $questionID, liked: $liked})
+          {
+            __typename
+            answer{
+              __typename
+              question
+            }
+          },
+        }`,
+      variables: { questionID: payload.questionID, liked: payload.liked },
+    });
+    commit('createLikeAnswer', data);
   },
 
-  createLikeDislikeAnswer(context, payload) {
-    Answer.createLikeAnswer(payload.questionID, payload.liked)
-      .then((likeDislikeAnswer) => {
-        context.commit('createLikeDislikeAnswer', likeDislikeAnswer);
-      })
+  async createLikeDislikeAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+        mutation createLikeDislikeAnswer($questionID: ID!, $liked: Boolean) {
+          createAnswer(data: {questionID: $questionID, liked: $liked})
+          {
+            __typename
+            answer{
+              __typename
+              question
+            }
+          },
+        }`,
+      variables: { questionID: payload.questionID, liked: payload.liked },
+    });
+    commit('createLikeDislikeAnswer', data);
   },
 
-  createRegulatorAnswer(context, payload) {
-    Answer.createRegulatorAnswer(payload.questionID, payload.rating)
-      .then((regulatorAnswer) => {
-        context.commit('createRegulatorAnswer', regulatorAnswer);
-      })
+  async createRegulatorAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+        mutation createRegulatorAnswer($questionID: ID!, $rating: Float!) {
+          createAnswer(data: {questionID: $questionID, rating: $rating})
+          {
+            __typename
+            answer{
+              __typename
+              question
+            }
+          },
+        }`,
+      variables: { questionID: payload.questionID, rating: payload.rating },
+    });
+    commit('createRegulatorAnswer', data);
   },
 
-  createFavoriteAnswer(context, payload) {
-    Answer.createFavoriteAnswer(payload.questionID, payload.itemID)
-      .then((favoriteAnswer) => {
-        context.commit('createFavoriteAnswer', favoriteAnswer);
-      })
+  async createFavoriteAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+        mutation createFavoriteAnswer($questionID: ID!, $favoriteItem: ID!) {
+          createAnswer(data: {questionID: $questionID, favoriteItem: $favoriteItem})
+          {
+            __typename
+            answer{
+              __typename
+              question
+            }
+          },
+        }`,
+      variables: { questionID: payload.questionID, favoriteItem: payload.itemID },
+    });
+    commit('createFavoriteAnswer', data);
   },
 
-  createRankingAnswer(context, payload) {
-    Answer.createRankingAnswer(payload.questionID, [JSON.stringify(payload.rankedItems)])
-      .then((rankingAnswer) => {
-        context.commit('createRankingAnswer', rankingAnswer);
-      })
+  async createRankingAnswer({ commit }, payload) {
+    const data = await client.mutate({
+      mutation: gql`
+        mutation createRankingAnswer($questionID: ID!, $rankedItems: [ID!]) {
+          createAnswer(data: {questionID: $questionID, rankedItems: $rankedItems})
+          {
+            __typename
+            answer{
+              __typename
+              question
+            }
+          },
+        }`,
+      variables: { questionID: payload.questionID, rankedItems: payload.rankedItems },
+    });
+    commit('createRankingAnswer', data);
   },
 
 }

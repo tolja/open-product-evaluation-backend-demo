@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap-slider/dist/css/bootstrap-slider.css'
 
+
 Vue.config.productionTip = false
 
 Vue.use(Vuex);
@@ -19,8 +20,8 @@ Vue.use(bFormSlider)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  store,
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
