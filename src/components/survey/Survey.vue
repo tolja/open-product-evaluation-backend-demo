@@ -20,13 +20,16 @@
                 {{survey.activeSurvey.title}}
                 </p>
                 <p class="card-title" v-else>
-                  Keine Umfrage aktiv!
+                  <span class="error">Noch keine Umfrage definiert!</span>
+                </p>
+                <p class="card-title" v-if="(survey.activeSurvey) && !survey.activeSurvey.questions">
+                  <span class="error">Für diese Umfrage wurden noch keine Fragen definiert!</span>
                 </p>
               </div>
             </div>
             <div class="col">
               <div class="card-body">
-                <router-link to="/question" v-if="survey.activeSurvey" class="btn btn-primary" tag="button">Umfrage starten!</router-link>
+                <router-link to="/question" v-if="(survey.activeSurvey) && survey.activeSurvey.questions" class="btn btn-primary" tag="button">Umfrage starten!</router-link>
               </div>
               <div class="col">
                 <div class="card-body">
@@ -52,11 +55,10 @@
       }
     },
     created() {
-
-
+        this.$store.dispatch('subscribeContext', this.$store.getters.getCurrentContext.id)
     },
     mounted() {
-      this.$store.dispatch('subscribeContext',this.$store.getters.getCurrentContext.id)
+
     },
     computed: {
       survey() {
@@ -72,5 +74,7 @@
 </script>
 
 <style scoped>
-
+.error {
+  color: red;
+}
 </style>

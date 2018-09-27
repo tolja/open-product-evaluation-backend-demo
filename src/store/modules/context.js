@@ -140,8 +140,8 @@ const actions = {
     commit('getContextList', data);
   },
 
-   subscribeContext({ commit }, payload){
-    client.subscribe({
+    subscribeContext({ commit }, payload){
+     client.subscribe({
       query: gql`
         subscription subscribeContext($contextID: ID!) {
           contextUpdate(contextID: $contextID)
@@ -232,7 +232,6 @@ const actions = {
       variables: { contextID: payload },
     }).subscribe({
       next(data) {
-        console.log(data);
         commit('subscribeContext', data);
       },
       error(err) { console.error('err', err); },

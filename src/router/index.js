@@ -48,6 +48,10 @@ export default new Router({
         {
           path: 'list',
           component: ContextList,
+          beforeEnter: (to, from, next) => {
+            store.dispatch("getContextList")
+            next()
+          }
         }],
     },
     {
