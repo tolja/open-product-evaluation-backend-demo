@@ -9,12 +9,21 @@
           <div class="col-8">
             <div class="card-body">
               <strong class="card-title">Aktive Umfrage</strong>
-              <p class="card-text">
+              <p class="card-text" v-if="context.activeSurvey">
                 {{ context.activeSurvey.title }}
               </p>
-              <strong class="card-title">Fragen-Typen in dieser Umfrage</strong>
-              <p class="card-text">
+              <p class="card-text" v-else>
+                Keine Umfrage aktiv!
+              </p>
+              <strong class="card-title" v-if="context.activeSurvey">Fragen-Typen in dieser Umfrage</strong>
+              <p class="card-text" v-if="context.activeSurvey">
                 {{ context.activeSurvey.types }}
+              </p>
+              <strong class="card-title" v-if="context.devices">Verbundene Devices mit diesem Kontext</strong>
+              <p>
+              <span class="card-text" v-for="(device,index) in context.devices" :key="device.id">
+                {{ device.name }}<span v-if="index !== (context.devices.length - 1)">,</span>
+              </span>
               </p>
             </div>
           </div>
@@ -37,7 +46,7 @@
       return {
       }
     },
-    created() {
+    mounted() {
       this.$store.dispatch("getContextList")
       this.$store.dispatch("cleanCurrentContext")
     },

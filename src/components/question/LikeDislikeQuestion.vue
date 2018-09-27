@@ -57,17 +57,17 @@
     methods: {
 
       createLikeDislikeAnswer() {
-
+        this.resetButtons();
         if (this.$store.getters.getLikeDislikeAnswers.length !== 0) {
 
           const likeDislikeAnswers = this.$store.getters.getLikeDislikeAnswers;
 
-          if(likeDislikeAnswers.includes(this.currentQuestion.id)) {
-            this.$emit('nextQuestion')
-            Router.push('/question');
+          if(!likeDislikeAnswers.includes(this.currentQuestion.id)) {
+            this.sendLikeDislikeAnswer();
           }
           else {
-            this.sendLikeDislikeAnswer();
+            this.$emit('nextQuestion')
+            Router.push('/question');
           }
 
         } else {
@@ -79,7 +79,6 @@
           questionID: this.currentQuestion.id,
           liked: this.liked
         }).then(() => {
-          this.resetButtons();
           this.$emit('nextQuestion')
           Router.push('/question');
         })

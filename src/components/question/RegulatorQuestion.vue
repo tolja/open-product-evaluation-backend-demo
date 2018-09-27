@@ -65,7 +65,10 @@
 
           const regulatorAnswers = this.$store.getters.getRegulatorAnswers;
 
-          if(regulatorAnswers.includes(this.currentQuestion.id)) {
+          if(!regulatorAnswers.includes(this.currentQuestion.id)) {
+            this.sendRegulatorAnswer()
+          }
+          else {
             this.$emit('nextQuestion')
             Router.push('/question');
           }

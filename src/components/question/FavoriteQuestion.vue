@@ -62,13 +62,15 @@
 
           const favoriteAnswers = this.$store.getters.getFavoriteAnswers;
 
-          if(favoriteAnswers.includes(this.currentQuestion.id)) {
+          if(!favoriteAnswers.includes(this.currentQuestion.id)) {
+            this.sendFavoriteAnswer()
+          }
+          else {
             this.$emit('nextQuestion')
             Router.push('/question');
           }
 
         } else {
-
           this.sendFavoriteAnswer()
         }
       },

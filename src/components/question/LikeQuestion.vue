@@ -57,12 +57,16 @@
     methods: {
 
       createLikeAnswer() {
-
+        this.resetButton();
         if (this.$store.getters.getLikeAnswers.length !== 0) {
 
           const likeAnswers = this.$store.getters.getLikeAnswers;
 
-          if(likeAnswers.includes(this.currentQuestion.id)) {
+          if(!likeAnswers.includes(this.currentQuestion.id)) {
+
+            this.sendLikeAnswer()
+          }
+          else {
             this.$emit('nextQuestion')
             Router.push('/question');
           }
@@ -74,7 +78,6 @@
       sendLikeAnswer() {
         this.$store.dispatch('createLikeAnswer',{ questionID: this.currentQuestion.id, liked: this.liked } ).then(() => {
           this.$emit('nextQuestion')
-          this.resetButton();
           Router.push('/question');
         })
       },

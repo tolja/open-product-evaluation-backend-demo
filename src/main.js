@@ -14,7 +14,7 @@ import 'bootstrap-slider/dist/css/bootstrap-slider.css'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 Vue.use(bFormSlider)
 
 /* eslint-disable no-new */

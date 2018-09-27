@@ -41,7 +41,7 @@
             </div>
         <div class="row">
           <div class="col">
-            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-primary">Antwort senden (Aktuelle Reihenfolge)</button>
+            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-success">Antwort senden (Aktuelle Reihenfolge)</button>
           </div>
           <div class="col">
             <button type="submit" v-on:click.prevent="createEmptyRankingAnswer()" class="btn btn-danger">Antwort senden (Neutral, leeres Array)</button>
@@ -88,7 +88,10 @@
 
           const rankingAnswers = this.$store.getters.getRankingAnswers;
 
-          if(rankingAnswers.includes(this.currentQuestion.id)) {
+          if(!rankingAnswers.includes(this.currentQuestion.id)) {
+            this.sendRankingAnswer()
+          }
+          else {
             this.$emit('nextQuestion')
             Router.push('/question');
           }

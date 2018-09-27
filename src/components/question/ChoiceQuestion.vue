@@ -47,7 +47,14 @@
             </div>
           </div>
         </div>
-
+    <div class="row">
+      <div class="col-12">
+        <label>
+          <input type="radio" name="name" v-model="choiceID" v-bind:value="null"/>
+          <label>Keine Antwort</label>
+        </label>
+      </div>
+    </div>
       <div class="row">
         <div class="col-12">
           <p><button type="submit" v-on:click.prevent="createChoiceAnswer()" class="btn btn-primary">Antwort senden</button></p>
@@ -65,7 +72,7 @@
         name: "ChoiceQuestion",
       data() {
           return {
-           choiceID: null
+           choiceID: this.currentQuestion.choiceDefault
           }
       },
       props: ['currentQuestion','questionCounter','questionLength'],
@@ -78,7 +85,10 @@
 
             const choiceAnswers = this.$store.getters.getChoiceAnswers;
 
-            if(choiceAnswers.includes(this.currentQuestion.id)) {
+            if(!choiceAnswers.includes(this.currentQuestion.id)) {
+              this.sendChoiceAnswer()
+            }
+            else {
               this.$emit('nextQuestion')
               Router.push('/question');
             }

@@ -42,10 +42,6 @@ export default new Router({
       ]
     },
     {
-      path: '/device',
-      component: AppWrapper,
-    },
-    {
       path: '/context',
       component: AppWrapper,
       children: [
@@ -62,7 +58,7 @@ export default new Router({
           path: '',
           component: Survey,
           beforeEnter (to, from, next) {
-            if (Object.keys(store.state.contexts.currentContext).length !== 0) {
+            if (Object.keys(store.state.contexts.currentContext.context).length !== 0) {
               next();
             } else {
               next('/context/list');
@@ -79,7 +75,7 @@ export default new Router({
           component: QuestionManager,
           beforeEnter (to, from, next) {
 
-            if (Object.keys(store.state.contexts.currentContext.context).length !== 0) {
+            if (store.state.contexts.currentContext.context.activeSurvey !== null) {
               next();
             } else {
               next('/context/list');

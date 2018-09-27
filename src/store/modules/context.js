@@ -60,6 +60,10 @@ const actions = {
           contexts {
             id
             name
+            devices {
+              id
+              name
+            }
             activeSurvey {
               id
               description
@@ -136,8 +140,107 @@ const actions = {
     commit('getContextList', data);
   },
 
+   subscribeContext({ commit }, payload){
+    client.subscribe({
+      query: gql`
+        subscription subscribeContext($contextID: ID!) {
+          contextUpdate(contextID: $contextID)
+          {
+            context {
+              id
+              name
+              devices {
+                id
+                name
+              }
+              activeSurvey {
+                id
+                description
+                title
+                types
+                questions {
+                  id
+                  description
+                  value
+                  items {
+                    image {
+                      url
+                      id
+                    }
+                    label
+                  }
+                  ... on LikeQuestion {
+                    likeIcon {
+                      id
+                      url
+                    }
+                  }
+                  ... on LikeDislikeQuestion {
+                    likeIcon {
+                      id
+                      url
+                    }
+                    dislikeIcon {
+                      id
+                      url
+                    }
+                  }
+                  ... on ChoiceQuestion {
+                    choices {
+                      id
+                      image {
+                        url
+                      }
+                      label
+                      code
+                    }
+                    choiceDefault: default
+                  }
+                  ... on RegulatorQuestion {
+                    labels {
+                      image {
+                        url
+                      }
+                      id
+                      label
+                      value
+                    }
+                    default
+                    max
+                    min
+                    stepSize
+                  }
+                  items {
+                    id
+                    image {
+                      url
+                    }
+                    label
+                  }
+                }
+              }
+              states {
+                key
+                value
+              }
+            }
+            changedAttributes
+            stateKey
+            event
+          },
+        }`,
+      variables: { contextID: payload },
+    }).subscribe({
+      next(data) {
+        console.log(data);
+        commit('subscribeContext', data);
+      },
+      error(err) { console.error('err', err); },
+    });
+  },
+
   setCurrentContext(context, payload) {
-      context.commit('setCurrentContext', payload);
+      context.commit('setCurrentContext', payload.context);
       localStorage.setItem('currentContext',JSON.stringify(payload.context));
   },
 
@@ -253,6 +356,10 @@ const actions = {
 
 const mutations = {
 
+  subscribeContext(state, payload) {
+    state.currentContext.context = payload.data.contextUpdate.context;
+  },
+
   cleanCurrentContext(state) {
     state.currentContext.answerList = [];
     state.currentContext.context = {};
@@ -268,8 +375,12 @@ const mutations = {
     state.contextList = payload.data.contexts;
   },
 
+  getCurrentContext(state, payload) {
+    state.currentContext.context = payload.data.context;
+  },
+
   setCurrentContext(state, payload) {
-    state.currentContext.context = payload.context;
+    state.currentContext.context = payload;
   },
 
   createChoiceAnswer(state, payload) {
