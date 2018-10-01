@@ -1,9 +1,8 @@
 {
-  "name": "open-product-evaluation-server-demo",
+  "name": "open-product-evaluation-demo",
   "version": "1.0.0",
-  "description": "Open Product Evaluation Server Demo",
+  "description": "Open Product Evaluation Demo",
   "author": "Anatol Walger <anatol.walger@smail.th-koeln.de>",
-  "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
