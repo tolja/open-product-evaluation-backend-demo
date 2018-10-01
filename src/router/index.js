@@ -62,7 +62,7 @@ export default new Router({
           path: '',
           component: Survey,
           beforeEnter (to, from, next) {
-            if (Object.keys(store.state.contexts.currentContext.context).length !== 0) {
+            if (store.state.contexts.currentContext.context && Object.keys(store.state.contexts.currentContext.context).length !== 0) {
               next();
             } else {
               next('/context/list');
@@ -79,7 +79,7 @@ export default new Router({
           component: QuestionManager,
           beforeEnter (to, from, next) {
 
-            if (store.state.contexts.currentContext.context.activeSurvey !== null) {
+            if (store.state.contexts.currentContext.context.activeSurvey && store.state.contexts.currentContext.context.activeSurvey !== null) {
               next();
             } else {
               next('/context/list');

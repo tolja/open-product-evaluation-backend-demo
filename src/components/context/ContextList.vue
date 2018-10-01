@@ -1,9 +1,50 @@
 <template>
-      <form id="context-list" method="post">
+  <div>
+      <form id="private-context" method="post">
+
+          <div class="card context">
+              <div class="card-header">
+                Privater Kontext
+              </div>
+            <div class="row">
+              <div class="col-12">
+            <div class="card-body">
+              <p class="card-text">
+                Mit einem privaten Kontext verbinden
+              </p>
+        </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <div class="card-body">
+                  <label for="input_contextID">Kontext ID eingeben</label>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="card-body">
+                    <input type="text"
+                           name="contextID"
+                           id="input_contextID"
+                           class="form-control"
+                           v-model="contextID" />
+                  </div>
+                </div>
+          <div class="col-4 my-auto">
+            <div class="card-body">
+              <button type="submit" v-on:click.prevent="getContext(contextID)" class="btn btn-primary">Wählen</button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </form>
+<form id="context-list" method="post">
       <div class="card context" v-for="context in contexts" :key="context.id">
         <div class="card-header">
          {{context.name}}
         </div>
+
+
 
         <div class="row">
           <div class="col-8">
@@ -32,14 +73,14 @@
           </div>
           <div class="col-4 my-auto">
             <div class="card-body">
-              <button type="submit" v-on:click.prevent="updateDevice(context.id);setCurrentContext(context)" class="btn btn-primary">Wählen</button>
+              <button type="submit" v-on:click.prevent="getContext(context.id)" class="btn btn-primary">Verbinden</button>
             </div>
           </div>
         </div>
       </div>
       </form>
 
-
+  </div>
 </template>
 
 <script>
@@ -49,6 +90,7 @@
       return {
         deviceID: this.$store.getters.getDeviceID,
         hasContext: this.$store.getters.hasContext,
+        contextID: null
       }
     },
     created() {
@@ -60,12 +102,9 @@
       }
     },
     methods: {
-      updateDevice(context) {
-        this.$store.dispatch('updateDevice',{ context: context } )
+      getContext(contextID) {
+        this.$store.dispatch('getContext', contextID )
       },
-      setCurrentContext(context) {
-        this.$store.dispatch('setCurrentContext',{ context: context } )
-      }
     },
   };
 </script>

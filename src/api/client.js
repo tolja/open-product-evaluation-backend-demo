@@ -1,45 +1,41 @@
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient  } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
-import { ApolloLink } from 'apollo-link'
-import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory';
+import { ApolloLink  } from 'apollo-link'
+import { InMemoryCache, IntrospectionFragmentMatcher  } from 'apollo-cache-inmemory';
 import introspectionQueryResultData from './fragmentTypes.json';
-import { split } from 'apollo-link'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
+import { split  } from 'apollo-link'
+import {  WebSocketLink  } from 'apollo-link-ws'
+import SubscriptionClient from './subscriptionClient'
+import { getMainDefinition  } from 'apollo-utilities'
+import store from '@/store/store';
+
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
 });
 
+const uri = 'http://localhost:3000'
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000',
+  uri: uri,
 });
 
-
-const wsLink = new WebSocketLink({
-  uri: `${'http://localhost:3000'
-    .replace('http', 'ws')}`,
-  options: {
-    reconnect: true,
-    connectionParams: () => {
-      return { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    }
-  }
-})
+const wsLink = new WebSocketLink(SubscriptionClient);
 
 const authMiddleware = new ApolloLink((operation, forward) => {
 
-  const token = localStorage.getItem('token')
-
+  const token = store.getters.getDeviceToken
   operation.setContext({
     headers: {
-      authorization: token ? `Bearer ${token}` : ''
+
+      Authorization: token ? `Bearer ${token}` : ''
     }
 
   });
 
   return forward(operation);
 });
+
 
 const link = split(
   // split based on operation type
@@ -48,12 +44,12 @@ const link = split(
     return kind === 'OperationDefinition' &&
       operation === 'subscription'
   },
-  wsLink,
+ wsLink,
   authMiddleware.concat(httpLink),
 )
 
 
 export default new ApolloClient({
   link: link,
-  cache: new InMemoryCache({fragmentMatcher})
+  cache: new InMemoryCache({fragmentMatcher}),
 });

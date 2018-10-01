@@ -21,6 +21,7 @@
         name: "QuestionsAnswered",
       created: function () {
         this.$store.dispatch('deleteDeviceFromContext')
+        this.$store.dispatch('unsubscribeContext')
       }
     }
 </script>

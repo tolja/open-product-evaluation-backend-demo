@@ -1,5 +1,7 @@
-import client from '@/api/client';
 import gql from 'graphql-tag';
+import Router from '@/router';
+import client from '@/api/client';
+import SubscriptionClient from '@/api/subscriptionClient'
 
 const state = {
   contextList: [],
@@ -51,6 +53,96 @@ const actions = {
 
   cleanCurrentContext(context) {
     context.commit('cleanCurrentContext');
+  },
+
+  async getContext({ commit }, payload) {
+
+    SubscriptionClient.close();
+    SubscriptionClient.connect();
+
+    const data = await client.query({
+      query: gql`
+        query getContext($contextID: ID!) {
+          context(contextID: $contextID) {
+            id
+            name
+            devices {
+              id
+              name
+            }
+            activeSurvey {
+              id
+              description
+              title
+              types
+              questions {
+                id
+                description
+                value
+                items {
+                  image {
+                    url
+                    id
+                  }
+                  label
+                }
+                ... on LikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on LikeDislikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                  dislikeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on ChoiceQuestion {
+                  choices {
+                    id
+                    image {
+                      url
+                    }
+                    label
+                    code
+                  }
+                  choiceDefault: default
+                }
+                ... on RegulatorQuestion {
+                  labels {
+                    image {
+                      url
+                    }
+                    id
+                    label
+                    value
+                  }
+                  default
+                  max
+                  min
+                  stepSize
+                }
+                items {
+                  id
+                  image {
+                    url
+                  }
+                  label
+                }
+              }
+            }
+            activeQuestion { id }
+            states { key value }
+          }
+        }`, variables: { contextID: payload },
+
+    });
+    commit('setCurrentContext', data);
   },
 
   async getContextList({ commit }) {
@@ -140,10 +232,19 @@ const actions = {
     commit('getContextList', data);
   },
 
-    subscribeContext({ commit }, payload){
-     client.subscribe({
-      query: gql`
-        subscription subscribeContext($contextID: ID!) {
+  unsubscribeContext({ commit } ){
+    console.log("unsubscribe")
+    SubscriptionClient.unsubscribeAll();
+    commit('unsubscribeContext');
+  },
+
+   async subscribeContext({ commit, dispatch }, payload){
+
+     SubscriptionClient.close();
+     SubscriptionClient.connect();
+
+    await client.subscribe({
+      query: gql`subscription subscribeContext($contextID: ID!) {
           contextUpdate(contextID: $contextID)
           {
             context {
@@ -229,18 +330,13 @@ const actions = {
             event
           },
         }`,
-      variables: { contextID: payload },
-    }).subscribe({
+       variables: { contextID: payload } }).subscribe({
       next(data) {
+        console.log("aber ich bin auch ein bisschen ein otto geworden")
         commit('subscribeContext', data);
       },
-      error(err) { console.error('err', err); },
+      error(err) { console.log("ey ich hab fehler man"); console.error('err', err); },
     });
-  },
-
-  setCurrentContext(context, payload) {
-      context.commit('setCurrentContext', payload.context);
-      localStorage.setItem('currentContext',JSON.stringify(payload.context));
   },
 
   async createChoiceAnswer({ commit }, payload) {
@@ -359,6 +455,10 @@ const mutations = {
     state.currentContext.context = payload.data.contextUpdate.context;
   },
 
+  unsubscribeContext(state) {
+    state.currentContext.context = null;
+  },
+
   cleanCurrentContext(state) {
     state.currentContext.answerList = [];
     state.currentContext.context = {};
@@ -374,12 +474,10 @@ const mutations = {
     state.contextList = payload.data.contexts;
   },
 
-  getCurrentContext(state, payload) {
-    state.currentContext.context = payload.data.context;
-  },
-
   setCurrentContext(state, payload) {
-    state.currentContext.context = payload;
+    state.currentContext.context = payload.data.context;
+    localStorage.setItem('currentContext',JSON.stringify(payload.data.context));
+    Router.push('/survey');
   },
 
   createChoiceAnswer(state, payload) {

@@ -40,10 +40,9 @@ const actions = {
       variables: { name: "Demo-Client" },
     });
     commit('createDevice', payload);
-    Router.push('/context/list');
   },
 
-  async updateDevice({ commit }, context) {
+  async updateDevice({ commit }, contextID) {
     await client.mutate({
       mutation: gql`
         mutation updateDevice($deviceID: ID!, $context: ID) {
@@ -54,10 +53,9 @@ const actions = {
             }
           }
         }`,
-      variables: { deviceID: state.deviceID, context: context.context },
+      variables: { deviceID: state.deviceID, context: contextID },
     });
     commit('updateDevice');
-    Router.push('/survey');
   },
 
   async deleteDeviceFromContext({ commit }) {
@@ -85,6 +83,7 @@ const mutations = {
     state.token = payload.data.createDevice.token;
     localStorage.setItem('deviceID',payload.data.createDevice.device.id);
     localStorage.setItem('token',payload.data.createDevice.token);
+    Router.push('/context/list');
   },
 
   updateDevice(state) {

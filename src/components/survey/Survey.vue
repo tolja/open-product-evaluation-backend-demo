@@ -55,9 +55,13 @@
       }
     },
     created() {
-        this.$store.dispatch('subscribeContext', this.$store.getters.getCurrentContext.id)
+
     },
     mounted() {
+
+      this.$store.dispatch('updateDevice', this.$store.getters.getCurrentContext.id ).then((response) => {
+        this.$store.dispatch('subscribeContext', this.$store.getters.getCurrentContext.id )
+      })
 
     },
     computed: {
@@ -68,6 +72,7 @@
     methods: {
       deleteDeviceFromContext() {
         this.$store.dispatch('deleteDeviceFromContext')
+        this.$store.dispatch('unsubscribeContext')
       }
     },
   };
