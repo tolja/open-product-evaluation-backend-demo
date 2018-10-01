@@ -1,8 +1,6 @@
 <template>
-  <div class="card">
-    <div class="card-body">
 
-      <form id="context-list" method="post">
+  <form id="context-list" method="post">
         <div class="card context">
           <div class="card-header">
            Umfrage starten
@@ -42,9 +40,6 @@
       </form>
 
 
-    </div>
-  </div>
-
 </template>
 
 <script>
@@ -71,8 +66,11 @@
     },
     methods: {
       deleteDeviceFromContext() {
-        this.$store.dispatch('deleteDeviceFromContext')
-        this.$store.dispatch('unsubscribeContext')
+
+        this.$store.dispatch('deleteDeviceFromContext').then((response) => {
+          this.$store.dispatch('unsubscribeContext' )
+        })
+
       }
     },
   };

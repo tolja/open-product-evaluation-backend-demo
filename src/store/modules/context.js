@@ -135,9 +135,21 @@ const actions = {
                   label
                 }
               }
+              votes {
+                id
+                context
+                device
+                answers{
+                  question
+                  ...on LikeAnswer { liked }
+                  ...on LikeDislikeAnswer { liked }
+                  ...on ChoiceAnswer { choice }
+                  ...on RegulatorAnswer { rating normalized }
+                  ...on RankingAnswer { rankedItems }
+                  ...on FavoriteAnswer { favoriteItem }
+                }
+              }
             }
-            activeQuestion { id }
-            states { key value }
           }
         }`, variables: { contextID: payload },
 
@@ -161,70 +173,6 @@ const actions = {
               description
               title
               types
-              questions {
-                id
-                description
-                value
-                items {
-                  image {
-                    url
-                    id
-                  }
-                  label
-                }
-                ... on LikeQuestion {
-                  likeIcon {
-                    id
-                    url
-                  }
-                }
-                ... on LikeDislikeQuestion {
-                  likeIcon {
-                    id
-                    url
-                  }
-                  dislikeIcon {
-                    id
-                    url
-                  }
-                }
-                ... on ChoiceQuestion {
-                  choices {
-                    id
-                    image {
-                      url
-                    }
-                    label
-                    code
-                  }
-                  choiceDefault: default
-                }
-                ... on RegulatorQuestion {
-                  labels {
-                    image {
-                      url
-                    }
-                    id
-                    label
-                    value
-                  }
-                  default
-                  max
-                  min
-                  stepSize
-                }
-                items {
-                  id
-                  image {
-                    url
-                  }
-                  label
-                }
-              }
-            }
-            states {
-              key
-              value
             }
           }
         }`
@@ -233,7 +181,6 @@ const actions = {
   },
 
   unsubscribeContext({ commit } ){
-    console.log("unsubscribe")
     SubscriptionClient.unsubscribeAll();
     commit('unsubscribeContext');
   },
@@ -319,6 +266,20 @@ const actions = {
                     label
                   }
                 }
+                votes {
+                  id
+                  context
+                  device
+                  answers{
+                    question
+                    ...on LikeAnswer { liked }
+                    ...on LikeDislikeAnswer { liked }
+                    ...on ChoiceAnswer { choice }
+                    ...on RegulatorAnswer { rating normalized }
+                    ...on RankingAnswer { rankedItems }
+                    ...on FavoriteAnswer { favoriteItem }
+                  }
+                }
               }
               states {
                 key
@@ -332,10 +293,9 @@ const actions = {
         }`,
        variables: { contextID: payload } }).subscribe({
       next(data) {
-        console.log("aber ich bin auch ein bisschen ein otto geworden")
         commit('subscribeContext', data);
       },
-      error(err) { console.log("ey ich hab fehler man"); console.error('err', err); },
+      error(err) { console.error('err', err); },
     });
   },
 
