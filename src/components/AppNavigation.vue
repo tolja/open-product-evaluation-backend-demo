@@ -2,7 +2,6 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
     <div class="container">
 
-      <!-- Brand -->
       <a class="navbar-brand" href="#">OPE Demo</a>
       <button
         class="navbar-toggler"
@@ -16,7 +15,6 @@
            id="navbarSupportedContent">
 
 
-        <!-- User Items -->
         <ul class="navbar-nav">
         </ul>
       </div>
@@ -33,10 +31,6 @@
       };
     },
     computed: {
-    hasDevice()
-      {
-        return this.$store.getters.getDeviceToken;
-      }
     },
   };
 </script>

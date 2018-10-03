@@ -18,8 +18,7 @@
           <div class="row align-items-center justify-content-center">
             <div class="col-auto" v-for="item in currentQuestion.items" :key="item.id">
               <div class="row">
-                <div class="col">
-                  <p></p>
+                <div class="col margintop-10">
                   <label v-bind:for="item.id"> {{item.label}}</label>
                 </div>
               </div>
@@ -31,27 +30,24 @@
           </div>
           </div>
         </div>
-<p></p>
+        <div class="container">
         <div class="row">
-          <div class="col" v-for="choice in currentQuestion.choices" :key="choice.id">
+          <div class="col choices" v-for="choice in currentQuestion.choices" :key="choice.id">
+
             <img class="choice-image" v-bind:src="choice.image.url" v-bind:alt="choice.label">
             <p></p>
             <label>
               <input type="radio" name="name" v-model="choiceID" v-bind:value="choice.id"/>
              <label v-bind:for="choice.id">{{choice.label}}</label>
               </label>
-            <div class="row">
-              <div class="col">
-              <p><strong>Code:</strong> {{choice.code}}</p>
-              </div>
-            </div>
           </div>
+        </div>
         </div>
     <div class="row">
       <div class="col-12">
         <label>
           <input type="radio" name="name" v-model="choiceID" v-bind:value="null"/>
-          <label>Keine Antwort</label>
+          <label>Ich möchte diese Antwort nicht geben</label>
         </label>
       </div>
     </div>
@@ -60,7 +56,7 @@
           <p><button type="submit" v-on:click.prevent="createChoiceAnswer()" class="btn btn-primary">Antwort senden</button></p>
         </div>
     </div>
-  </div>
+      </div>
       </div>
   </div>
 
@@ -122,4 +118,10 @@
   width:300px;
   height:200px;
 }
+  .choices {
+    margin-top:30px;
+  }
+  .margintop-10 {
+    margin-top: 10px;
+  }
 </style>

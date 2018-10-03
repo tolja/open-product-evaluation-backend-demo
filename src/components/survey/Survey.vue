@@ -77,7 +77,4 @@
 </script>
 
 <style scoped>
-.error {
-  color: red;
-}
 </style>

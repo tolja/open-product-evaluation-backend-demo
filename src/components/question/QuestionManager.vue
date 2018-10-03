@@ -31,7 +31,7 @@
           :questionLength="questionLength"></ranking-question>
 
 </div>
-        <questions-answered v-else></questions-answered>
+        <questions-answered :votes="votes" v-else></questions-answered>
 
 </template>
 
@@ -51,7 +51,8 @@
         currentQuestion: null,
         questionCounter: 0,
         questionLength: 0,
-        voteCreated: false
+        voteCreated: false,
+        votes: []
       }
     },
     components: {
@@ -79,7 +80,10 @@
         this.currentQuestion = this.$store.getters.getCurrentContext.activeSurvey.questions[this.questionCounter];
   }
   else {
-          this.voteCreated = true;
+          this.$store.dispatch('getVotes', this.$store.getters.getCurrentContext.activeSurvey.id).then((response) => {
+            this.votes = this.$store.getters.getVotes
+            this.voteCreated = true;
+          });
         }
       },
     },

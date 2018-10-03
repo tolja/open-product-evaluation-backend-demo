@@ -40,11 +40,16 @@
           </div>
             </div>
         <div class="row">
-          <div class="col">
-            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-success">Antwort senden (Aktuelle Reihenfolge)</button>
+          <div class="col-12">
+            <label>
+              <input type="radio" name="name" v-model="rankedIDs" v-bind:value="null"/>
+              <label>Ich möchte diese Antwort nicht geben</label>
+            </label>
           </div>
+        </div>
+        <div class="row">
           <div class="col">
-            <button type="submit" v-on:click.prevent="createEmptyRankingAnswer()" class="btn btn-danger">Antwort senden (Neutral, leeres Array)</button>
+            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-success">Antwort senden</button>
           </div>
         </div>
       </div>
@@ -74,13 +79,6 @@
     computed: {
     },
     methods: {
-
-      createEmptyRankingAnswer() {
-        this.$store.dispatch('createRankingAnswer',{ questionID: this.currentQuestion.id, rankedItems: null } ).then(() => {
-          this.$emit('nextQuestion')
-          Router.push('/question');
-        })
-      },
 
       createRankingAnswer() {
 
@@ -113,9 +111,11 @@
         })
       },
       setRankingIDs() {
-        this.rankedItems.forEach((item) => {
-          this.rankedIDs.push(item.id);
-        })
+        if (this.rankedIDs !== null) {
+          this.rankedItems.forEach((item) => {
+            this.rankedIDs.push(item.id);
+          })
+        }
       }
     }
   }

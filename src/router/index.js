@@ -13,9 +13,6 @@ import Survey from '@/components/survey/Survey.vue'
 //question
 import QuestionManager from '@/components/question/QuestionManager.vue'
 
-//vote
-import Vote from '@/components/vote/Vote.vue'
-
 
 import AppWrapper from '@/components/AppWrapper';
 import store from '@/store/store';
@@ -62,7 +59,7 @@ export default new Router({
           path: '',
           component: Survey,
           beforeEnter (to, from, next) {
-            if (store.state.contexts.currentContext.context && Object.keys(store.state.contexts.currentContext.context).length !== 0) {
+            if (store.state.contexts.context && Object.keys(store.state.contexts.context).length !== 0) {
               next();
             } else {
               next('/context/list');
@@ -79,22 +76,12 @@ export default new Router({
           component: QuestionManager,
           beforeEnter (to, from, next) {
 
-            if (store.state.contexts.currentContext.context.activeSurvey && store.state.contexts.currentContext.context.activeSurvey !== null) {
+            if (store.state.contexts.context.activeSurvey && store.state.contexts.context.activeSurvey !== null) {
               next();
             } else {
               next('/context/list');
             }
           },
-        },
-      ],
-    },
-    {
-      path: '/vote',
-      component: AppWrapper,
-      children: [
-        {
-          path: '',
-          component: Vote,
         },
       ],
     },

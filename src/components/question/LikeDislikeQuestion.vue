@@ -33,6 +33,14 @@
         </div>
         <div class="row">
           <div class="col-12">
+            <label>
+              <input type="radio" name="name" v-model="liked" v-bind:value="null" v-on:change="changeButtonColor()"/>
+              <label>Ich möchte diese Antwort nicht geben</label>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
             <p><button type="submit" v-on:click.prevent="createLikeDislikeAnswer()" class="btn btn-primary">Antwort senden</button></p>
           </div>
         </div>
@@ -88,9 +96,12 @@
           this.likeButton = 'btn btn-success';
           this.dislikeButton = 'btn btn-outline-danger';
         }
-        else {
+        else if(this.liked === false) {
           this.dislikeButton = 'btn btn-danger';
           this.likeButton = 'btn btn-outline-success';
+        }
+        else {
+          this.resetButtons()
         }
       },
       resetButtons() {

@@ -23,13 +23,10 @@
   import Router from '@/router';
     export default {
       name: "QuestionsAnswered",
-      created: function () {
-      },
-      computed: {
-        votes() {
-          return this.$store.getters.getCurrentContext.activeSurvey.votes;
-        }
-      },
+      props: ['votes'],
+     created() {
+
+     },
       methods: {
         deleteDeviceFromContext() {
           this.$store.dispatch('deleteDeviceFromContext').then((response) => {

@@ -95,6 +95,7 @@
     },
     created() {
       this.$store.dispatch("cleanCurrentContext")
+      this.$store.dispatch("cleanCurrentContextAnswers")
     },
     computed: {
       contexts() {

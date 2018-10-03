@@ -28,6 +28,14 @@
             <p>{{this.rating}}</p>
           </div>
         </div>
+          <div class="row">
+            <div class="col-12">
+              <label>
+                <input type="radio" name="name" v-model="noAnswer" v-bind:value="null"/>
+                <label>Ich möchte diese Antwort nicht geben</label>
+              </label>
+            </div>
+          </div>
         <div class="row">
           <div class="col-12">
             <p><button type="submit" v-on:click.prevent="createRegulatorAnswer()" class="btn btn-primary">Antwort senden</button></p>
@@ -47,6 +55,7 @@
     data() {
       return {
         rating: this.currentQuestion.default,
+        noAnswer: undefined,
         sliderTicks: [],
         sliderTickLabels: []
       }
@@ -78,13 +87,24 @@
         }
       },
       sendRegulatorAnswer() {
-        this.$store.dispatch('createRegulatorAnswer', {
-          questionID: this.currentQuestion.id,
-          rating: this.rating
-        }).then(() => {
-          this.$emit('nextQuestion')
-          Router.push('/question');
-        })
+        if (this.noAnswer !== null) {
+          this.$store.dispatch('createRegulatorAnswer', {
+            questionID: this.currentQuestion.id,
+            rating: this.rating
+          }).then(() => {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          })
+        }
+        else {
+          this.$store.dispatch('createRegulatorAnswer', {
+            questionID: this.currentQuestion.id,
+            rating: null
+          }).then(() => {
+            this.$emit('nextQuestion')
+            Router.push('/question');
+          })
+        }
       },
       getSliderData() {
 

@@ -17,7 +17,7 @@
         <div class="container">
           <div class="row align-items-center justify-content-center">
           <div class="col-auto" v-for="item in currentQuestion.items" :key="item.id">
-            <img class="image" v-bind:src="item.image.url" />
+            <img class="image" v-bind:src="item.image.url" :key="item.id" />
             <div class="row">
               <div class="col">
             <label>
@@ -30,6 +30,14 @@
             </div>
           </div>
         </div>
+          <div class="row">
+            <div class="col-12">
+              <label>
+                <input type="radio" name="name" v-model="itemID" v-bind:value="null"/>
+                <label>Ich möchte diese Antwort nicht geben</label>
+              </label>
+            </div>
+          </div>
         <div class="row">
           <div class="col-12">
             <p><button type="submit" v-on:click.prevent="createFavoriteAnswer()" class="btn btn-primary">Antwort senden</button></p>
