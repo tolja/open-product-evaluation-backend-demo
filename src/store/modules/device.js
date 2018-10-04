@@ -201,6 +201,10 @@ const actions = {
     SubscriptionClient.unsubscribe('deviceUpdate');
   },
 
+  deleteToken({commit }) {
+    commit('deleteToken')
+  }
+
 }
 
 const mutations = {
@@ -232,6 +236,11 @@ const mutations = {
     console.log(payload)
 
 
+  },
+
+  deleteToken(state) {
+    localStorage.setItem('token', null);
+    state.token = null;
   }
 
 

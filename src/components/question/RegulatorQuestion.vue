@@ -22,12 +22,14 @@
         </div>
         <p></p>
 
+          <div class="container">
         <div class="row">
           <div class="col">
             <b-form-slider v-model="rating" :ticks="sliderTicks" :ticks-labels="sliderTickLabels" :min="this.currentQuestion.min" :max="this.currentQuestion.max" :step="this.currentQuestion.stepSize" trigger-change-event></b-form-slider>
             <p>{{this.rating}}</p>
           </div>
         </div>
+          </div>
           <div class="row">
             <div class="col-12">
               <label>
@@ -56,6 +58,7 @@
       return {
         rating: this.currentQuestion.default,
         noAnswer: undefined,
+        questionLabels: [],
         sliderTicks: [],
         sliderTickLabels: []
       }
@@ -109,6 +112,18 @@
       getSliderData() {
 
         this.currentQuestion.labels.forEach((label) => {
+
+          this.questionLabels.push(label)
+
+        });
+
+        this.questionLabels.sort((a,b) => {
+          console.log(b.value)
+          console.log(a.value)
+          return b.value < a.value
+        })
+
+        this.questionLabels.forEach((label) => {
           this.sliderTicks.push(label.value);
           this.sliderTickLabels.push(label.label)
 
@@ -122,5 +137,9 @@
   .regulator-image-item {
     width:300px;
     height:200px;
+    margin-bottom:50px;
+  }
+  .slider {
+    width:500px;
   }
 </style>

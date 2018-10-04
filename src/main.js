@@ -9,7 +9,7 @@ import store from '@/store/store';
 import bFormSlider from 'vue-bootstrap-slider';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap-slider/dist/css/bootstrap-slider.css'
+import '../static/bootstrap-slider.css'
 
 
 Vue.config.productionTip = false

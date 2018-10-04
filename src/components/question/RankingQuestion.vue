@@ -49,7 +49,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-success">Antwort senden</button>
+            <button type="submit" v-on:click.prevent="createRankingAnswer()" class="btn btn-primary">Antwort senden</button>
           </div>
         </div>
       </div>
