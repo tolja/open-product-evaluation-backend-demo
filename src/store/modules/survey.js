@@ -47,6 +47,7 @@ const actions = {
   },
 
   async getVotes({ commit }, payload) {
+    client.cache.data.clear()
     const data = await client.query({
       query: gql`
         query getVotes($surveyID: ID!) {

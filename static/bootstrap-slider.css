@@ -48,6 +48,24 @@
   width: 720px;
   height: 20px;
 }
+
+@media(max-width: 1015px) {
+  .slider.slider-horizontal {
+    width:500px;
+  }
+}
+@media(max-width: 770px) {
+  .slider.slider-horizontal {
+    width:300px;
+  }
+}
+
+@media(max-width: 490px) {
+  .slider.slider-horizontal {
+    width:220px;
+  }
+}
+
 .slider.slider-horizontal .slider-track {
   height: 10px;
   width: 100%;

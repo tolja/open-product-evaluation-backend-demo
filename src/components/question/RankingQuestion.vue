@@ -25,7 +25,6 @@
                 </div>
               </draggable>
 
-
         <div class="row justify-content-center">
           <div class="col">
             <p></p>
@@ -125,6 +124,7 @@
 
   .image-list {
     display: inline-block;
+    vertical-align:top;
   }
 
   .item-list {
@@ -133,12 +133,18 @@
     padding: 0;
   }
 
+  @media(max-width: 700px) {
+  .image-list .image {
+    width:100px !important;
+    height:50px !important;
+  }
+  }
+
   .item-list:not(:last-child) {
     margin-right: 20px;
   }
 
   .image-list .image {
-    width:300px;
     height:200px;
     margin-bottom:15pt;
   }
