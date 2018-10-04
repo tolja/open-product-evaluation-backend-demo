@@ -80,8 +80,6 @@ const actions = {
     SubscriptionClient.close();
     SubscriptionClient.connect();
 
-    console.log("hallo i bims")
-
    await client.subscribe({
       query: gql`subscription subscribeDevice($deviceID: ID!) {
         deviceUpdate(deviceID: $deviceID)
@@ -101,7 +99,7 @@ const actions = {
       variables: { deviceID: state.deviceID } }).subscribe({
       next(data) {
         if(data.data.deviceUpdate.changedAttributes && (data.data.deviceUpdate.changedAttributes).includes('context')) {
-          console.log('context changed')
+
           if(data.data.deviceUpdate.device.context !== null) {
             commit('updateDevice');
             dispatch('getContext', data.data.deviceUpdate.device.context.id)
