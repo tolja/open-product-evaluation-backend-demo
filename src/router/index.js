@@ -46,9 +46,15 @@ export default new Router({
           path: 'list',
           component: ContextList,
           beforeEnter: (to, from, next) => {
-            store.dispatch('subscribeDevice')
-            store.dispatch("getContextList")
-            next()
+            if (store.state.device.token !== null) {
+              store.dispatch('reconnectClient')
+              store.dispatch('subscribeDevice')
+              store.dispatch("getContextList")
+              next()
+            }
+            else {
+              next('/');
+            }
           }
         }],
     },
@@ -60,10 +66,19 @@ export default new Router({
           path: '',
           component: Survey,
           beforeEnter (to, from, next) {
-            if (store.state.contexts.context && Object.keys(store.state.contexts.context).length !== 0) {
-              next();
-            } else {
-              next('/context/list');
+
+            if (store.state.device.token !== null) {
+
+              if (store.state.contexts.context && Object.keys(store.state.contexts.context).length !== 0) {
+                store.dispatch('reconnectClient')
+                store.dispatch('subscribeDevice')
+                next();
+              } else {
+                next('/context/list');
+              }
+            }
+            else {
+              next('/');
             }
           },
         }],
@@ -77,10 +92,15 @@ export default new Router({
           component: QuestionManager,
           beforeEnter (to, from, next) {
 
-            if (store.state.contexts.context.activeSurvey && store.state.contexts.context.activeSurvey !== null) {
-              next();
+            if (store.state.device.token !== null) {
+
+              if (store.state.contexts.context.activeSurvey && store.state.contexts.context.activeSurvey !== null) {
+                next();
+              } else {
+                next('/context/list');
+              }
             } else {
-              next('/context/list');
+              next('/');
             }
           },
         },

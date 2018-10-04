@@ -77,9 +77,6 @@ const actions = {
 
   async subscribeDevice({ commit, dispatch } ){
 
-    SubscriptionClient.close();
-    SubscriptionClient.connect();
-
    await client.subscribe({
       query: gql`subscription subscribeDevice($deviceID: ID!) {
         deviceUpdate(deviceID: $deviceID)
@@ -90,6 +87,72 @@ const actions = {
           context {
             id
             name
+            activeSurvey {
+              id
+              description
+              title
+              types
+              questions {
+                id
+                description
+                value
+                items {
+                  image {
+                    url
+                    id
+                  }
+                  label
+                }
+                ... on LikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on LikeDislikeQuestion {
+                  likeIcon {
+                    id
+                    url
+                  }
+                  dislikeIcon {
+                    id
+                    url
+                  }
+                }
+                ... on ChoiceQuestion {
+                  choices {
+                    id
+                    image {
+                      url
+                    }
+                    label
+                    code
+                  }
+                  choiceDefault: default
+                }
+                ... on RegulatorQuestion {
+                  labels {
+                    image {
+                      url
+                    }
+                    id
+                    label
+                    value
+                  }
+                  default
+                  max
+                  min
+                  stepSize
+                }
+                items {
+                  id
+                  image {
+                    url
+                  }
+                  label
+                }
+              }
+            }
           }
           }
           changedAttributes
@@ -98,10 +161,11 @@ const actions = {
       }`,
       variables: { deviceID: state.deviceID } }).subscribe({
       next(data) {
+        console.log(data)
         if(data.data.deviceUpdate.changedAttributes && (data.data.deviceUpdate.changedAttributes).includes('context')) {
 
           if(data.data.deviceUpdate.device.context !== null) {
-            commit('updateDevice');
+            console.log("context!=null")
             dispatch('getContext', data.data.deviceUpdate.device.context.id)
           }
         }
@@ -112,6 +176,14 @@ const actions = {
     });
   },
 
+  reconnectClient() {
+    SubscriptionClient.close();
+    SubscriptionClient.connect();
+  },
+
+  unsubscribeDevice(){
+    SubscriptionClient.unsubscribe('deviceUpdate');
+  },
 
 }
 

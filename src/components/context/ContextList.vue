@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form id="private-context" method="post" @submit.prevent="getContext(contextID)">
+      <form id="private-context" method="post" @submit.prevent="getPrivateContext(contextID)">
 
           <div class="card context">
               <div class="card-header">
@@ -110,10 +110,15 @@
       }
     },
     methods: {
-      getContext(contextID) {
+      getPrivateContext(contextID) {
         this.error = null
-        this.$store.dispatch('getContext', contextID).catch((err) => {
+        this.$store.dispatch('getContext', contextID).then((response) => {
+        }).catch((err) => {
           this.error = 'Die eingegebene Kontext-ID ist nicht korrekt.';
+        })
+      },
+      getContext(contextID) {
+        this.$store.dispatch('getContext', contextID).then((response) => {
         })
       },
     },

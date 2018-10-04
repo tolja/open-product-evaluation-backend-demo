@@ -29,7 +29,7 @@ const actions = {
   },
 
   async getContext({ commit }, payload) {
-
+      console.log("getting context")
     const data = await client.query({
       query: gql`
         query getContext($contextID: ID!) {
@@ -143,9 +143,6 @@ const actions = {
 
    async subscribeContext({ commit, dispatch }, payload){
 
-     SubscriptionClient.close();
-     SubscriptionClient.connect();
-
     await client.subscribe({
       query: gql`subscription subscribeContext($contextID: ID!) {
           contextUpdate(contextID: $contextID)
@@ -258,6 +255,7 @@ const mutations = {
   },
 
   setCurrentContext(state, payload) {
+    console.log("setting current context")
     state.context = payload.data.context;
     localStorage.setItem('currentContext',JSON.stringify(payload.data.context));
     Router.push('/survey');
