@@ -59,6 +59,22 @@ const actions = {
     commit('updateDevice');
   },
 
+  async updateDeviceOwners({ commit }, owners) {
+   const data = await client.mutate({
+      mutation: gql`
+        mutation updateDeviceOwners($deviceID: ID!, $context: ID, $owners: [ID!]) {
+          updateDevice(data: {context: $context, owners: $owners}, deviceID: $deviceID) {
+            device {
+              id
+              name
+            }
+          }
+        }`,
+      variables: { deviceID: state.deviceID, context: null, owners: owners },
+    });
+    commit('updateDeviceOwners', data);
+  },
+
   async deleteDeviceFromContext({ commit }) {
     await client.mutate({
       mutation: gql`
@@ -200,6 +216,10 @@ const mutations = {
   updateDevice(state) {
     state.hasContext = true;
     localStorage.setItem('hasContext',JSON.stringify(true));
+  },
+
+  updateDeviceOwners(state, payload) {
+    console.log(payload)
   },
 
   deleteDeviceFromContext(state) {
