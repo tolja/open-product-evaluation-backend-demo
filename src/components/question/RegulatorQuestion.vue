@@ -118,8 +118,6 @@
         });
 
         this.questionLabels.sort((a,b) => {
-          console.log(b.value)
-          console.log(a.value)
           return b.value < a.value
         })
 
@@ -137,9 +135,6 @@
   .regulator-image-item {
     width:300px;
     height:200px;
-    margin-bottom:50px;
-  }
-  .slider {
-    width:500px;
+    margin-bottom:20px;
   }
 </style>
