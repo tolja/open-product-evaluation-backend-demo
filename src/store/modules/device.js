@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import Router from '@/router';
 import client from '@/api/client';
+import SubscriptionClient from '@/api/subscriptionClient';
 
 const state = {
     token: localStorage.getItem('token'),
@@ -74,6 +75,46 @@ const actions = {
     commit('deleteDeviceFromContext');
   },
 
+  async subscribeDevice({ commit, dispatch } ){
+
+    SubscriptionClient.close();
+    SubscriptionClient.connect();
+
+    console.log("hallo i bims")
+
+   await client.subscribe({
+      query: gql`subscription subscribeDevice($deviceID: ID!) {
+        deviceUpdate(deviceID: $deviceID)
+        {
+          device {
+          id
+          lastUpdate
+          context {
+            id
+            name
+          }
+          }
+          changedAttributes
+          event
+        },
+      }`,
+      variables: { deviceID: state.deviceID } }).subscribe({
+      next(data) {
+        if(data.data.deviceUpdate.changedAttributes && (data.data.deviceUpdate.changedAttributes).includes('context')) {
+          console.log('context changed')
+          if(data.data.deviceUpdate.device.context !== null) {
+            commit('updateDevice');
+            dispatch('getContext', data.data.deviceUpdate.device.context.id)
+          }
+        }
+
+
+      },
+      error(err) { console.error('err', err); },
+    });
+  },
+
+
 }
 
 const mutations = {
@@ -95,6 +136,13 @@ const mutations = {
     state.hasContext = false;
     localStorage.setItem('hasContext',JSON.stringify(false));
   },
+
+  subscribeDevice(state, payload) {
+
+    console.log(payload)
+
+
+  }
 
 
 };

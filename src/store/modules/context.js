@@ -137,7 +137,7 @@ const actions = {
   },
 
   unsubscribeContext({ commit } ){
-    SubscriptionClient.unsubscribeAll();
+    SubscriptionClient.unsubscribe('contextUpdate');
     commit('unsubscribeContext');
   },
 

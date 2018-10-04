@@ -1,6 +1,6 @@
 <template>
   <div>
-      <form id="private-context" method="post">
+      <form id="private-context" method="post" @submit.prevent="getContext(contextID)">
 
           <div class="card context">
               <div class="card-header">
@@ -16,6 +16,11 @@
             </div>
             </div>
             <div class="row">
+              <div class="col-12" v-if="error">
+                <span class="error">{{ error }}</span>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-3">
                 <div class="card-body">
                   <label for="input_contextID">Kontext ID eingeben</label>
@@ -23,16 +28,17 @@
               </div>
               <div class="col-5">
                 <div class="card-body">
-                    <input type="text"
+                    <input required type="text"
                            name="contextID"
                            id="input_contextID"
                            class="form-control"
+                           onfocus="this.value = ''"
                            v-model="contextID" />
                   </div>
                 </div>
           <div class="col-4 my-auto">
             <div class="card-body">
-              <button type="submit" v-on:click.prevent="getContext(contextID)" class="btn btn-primary">Wählen</button>
+              <button type="submit" class="btn btn-primary">Wählen</button>
             </div>
           </div>
         </div>
@@ -90,7 +96,8 @@
       return {
         deviceID: this.$store.getters.getDeviceID,
         hasContext: this.$store.getters.hasContext,
-        contextID: null
+        contextID: null,
+        error: null
       }
     },
     created() {
@@ -104,7 +111,10 @@
     },
     methods: {
       getContext(contextID) {
-        this.$store.dispatch('getContext', contextID )
+        this.error = null
+        this.$store.dispatch('getContext', contextID).catch((err) => {
+          this.error = 'Die eingegebene Kontext-ID ist nicht korrekt.';
+        })
       },
     },
   };
@@ -114,4 +124,7 @@
 .context {
   margin-bottom:10pt;
 }
+  .error {
+    color: red;
+  }
 </style>
