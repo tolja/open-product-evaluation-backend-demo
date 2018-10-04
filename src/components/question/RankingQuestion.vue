@@ -135,8 +135,7 @@
 
   @media(max-width: 700px) {
   .image-list .image {
-    width:100px !important;
-    height:50px !important;
+    height:100px !important;
   }
   }
 
