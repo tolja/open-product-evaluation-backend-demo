@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import Router from '@/router';
 import client from '@/api/client';
 import SubscriptionClient from '@/api/subscriptionClient'
 
@@ -258,7 +257,6 @@ const mutations = {
     console.log("setting current context")
     state.context = payload.data.context;
     localStorage.setItem('currentContext',JSON.stringify(payload.data.context));
-    Router.push('/survey');
   },
 
 };

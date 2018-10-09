@@ -90,6 +90,7 @@
 </template>
 
 <script>
+  import Router from '@/router';
   export default {
     name: 'ContextList',
     data() {
@@ -113,12 +114,14 @@
       getPrivateContext(contextID) {
         this.error = null
         this.$store.dispatch('getContext', contextID).then((response) => {
+          Router.push('/survey');
         }).catch((err) => {
           this.error = 'Die eingegebene Kontext-ID ist nicht korrekt.';
         })
       },
       getContext(contextID) {
         this.$store.dispatch('getContext', contextID).then((response) => {
+          Router.push('/survey')
         })
       },
     },

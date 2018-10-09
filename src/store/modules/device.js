@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import Router from '@/router';
 import client from '@/api/client';
 import SubscriptionClient from '@/api/subscriptionClient';
 
@@ -214,7 +213,6 @@ const mutations = {
     state.token = payload.data.createDevice.token;
     localStorage.setItem('deviceID',payload.data.createDevice.device.id);
     localStorage.setItem('token',payload.data.createDevice.token);
-    Router.push('/context/list');
   },
 
   updateDevice(state) {
